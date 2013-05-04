@@ -1,0 +1,11 @@
+# Gradle
+.gradle
+
+# Eclipse
+.project
+.settings
+.classpath
+
+# Binaries
+bin
+build

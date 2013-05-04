@@ -1,0 +1,13 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile(
+		[group: 'com.google.guava', name: 'guava', version: '14.0.1'],
+		[group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.2.4']
+		)
+}
