@@ -6,6 +6,7 @@ repositories {
 }
 
 def slf4jVer = '1.7.5'
+def logbackVer = '1.0.11'
 
 dependencies {
 	compile(
@@ -13,6 +14,7 @@ dependencies {
 		[group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.2.4'],
 		[group: 'org.jsoup', name: 'jsoup', version: '1.7.2'],
 		[group: 'org.slf4j', name: 'slf4j-api', version: slf4jVer],
-		[group: 'org.slf4j', name: 'slf4j-simple', version: slf4jVer]
+		[group: 'ch.qos.logback', name: 'logback-classic', version: logbackVer],
+		[group: 'ch.qos.logback', name: 'logback-core', version: logbackVer]
 		)
 }
