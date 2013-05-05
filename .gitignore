@@ -9,3 +9,8 @@
 # Binaries
 bin
 build
+
+
+# Report
+report.csv
+

@@ -61,9 +61,10 @@ public class UriChecker implements Runnable {
 				children = extractChildren(resp);
 			}
 		} catch (RuntimeException e) {
-			// TODO Log the failure
+			logger.warn("Error fetching {}", uri);
 			result = new UriStatusDTO(from, depth, uri, uri, -1,
-					"Runntime Error", UriStatusDTO.Code.ERROR);
+					"RuntimeException: " + e.getMessage(),
+					UriStatusDTO.Code.ERROR);
 		}
 
 		if (children != null) {
@@ -88,12 +89,6 @@ public class UriChecker implements Runnable {
 		}
 
 		return response;
-		// int code = response.getStatusLine().getStatusCode();
-		// if (code == 301 || code == 302) {
-		// return fetchUri(response.getFirstHeader("Location").getValue());
-		// } else {
-		// return response;
-		// }
 	}
 
 	private UriStatusDTO fromResponse(HttpResponse resp) {
@@ -123,21 +118,23 @@ public class UriChecker implements Runnable {
 					.parse(resp.getEntity().getContent(), "UTF-8", base);
 
 		} catch (IllegalStateException e) {
-			throw new AssertionError(e); // TODO: something better
+			throw new AssertionError(e);
 		} catch (IOException e) {
-			throw new AssertionError(e); // TODO: something better
+			throw new AssertionError(e);
 		}
 
 		Builder<String> builder = ImmutableList.<String> builder();
 
-		Elements links = document.select("a[href]");
-		for (Element e : links) {
-			builder.add(e.absUrl("href"));
-		}
+		if (document != null) {
+			Elements links = document.select("a[href]");
+			for (Element e : links) {
+				builder.add(e.absUrl("href"));
+			}
 
-		Elements imgs = document.select("img[src]");
-		for (Element e : imgs) {
-			builder.add(e.absUrl("src"));
+			Elements imgs = document.select("img[src]");
+			for (Element e : imgs) {
+				builder.add(e.absUrl("src"));
+			}
 		}
 
 		return builder.build();
