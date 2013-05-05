@@ -1,8 +1,6 @@
 package kupczynski.info.linkchecker.checker.impl;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Collection;
 
 import kupczynski.info.linkchecker.checker.api.UriService;
@@ -123,24 +121,11 @@ public class UriChecker implements Runnable {
 	}
 
 	private Collection<String> extractChildrenFromHtml(HttpResponse resp) {
-
-		// TODO: base uri determination
-
-		URL url;
-		try {
-			url = new URL(uri);
-		} catch (MalformedURLException e) {
-			throw new AssertionError(e);
-		}
-
-		String base = url.getProtocol() + "://" + url.getHost();
-
 		// TODO: encoding
 
 		Document document;
 		try {
-			document = Jsoup
-					.parse(resp.getEntity().getContent(), "UTF-8", base);
+			document = Jsoup.parse(resp.getEntity().getContent(), "UTF-8", uri);
 
 		} catch (IllegalStateException e) {
 			throw new AssertionError(e);
