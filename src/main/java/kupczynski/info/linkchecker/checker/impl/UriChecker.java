@@ -13,7 +13,9 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.params.ClientPNames;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpParams;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -57,7 +59,9 @@ public class UriChecker implements Runnable {
 
 			boolean isHtml = resp.getFirstHeader("Content-type").getValue()
 					.startsWith("text/html");
-			if (follow && isHtml) {
+			boolean isRedirect = isRedirect(resp.getStatusLine()
+					.getStatusCode());
+			if (follow && (isHtml || isRedirect)) {
 				children = extractChildren(resp);
 			}
 		} catch (RuntimeException e) {
@@ -79,6 +83,10 @@ public class UriChecker implements Runnable {
 		HttpClient client = new DefaultHttpClient();
 		HttpGet httpget = new HttpGet(uri);
 
+		HttpParams params = httpget.getParams();
+		params.setParameter(ClientPNames.HANDLE_REDIRECTS, Boolean.FALSE);
+		httpget.setParams(params);
+
 		HttpResponse response;
 		try {
 			response = client.execute(httpget);
@@ -95,12 +103,26 @@ public class UriChecker implements Runnable {
 		StatusLine statusLine = resp.getStatusLine();
 		return new UriStatusDTO(from, depth, uri, uri,
 				statusLine.getStatusCode(), statusLine.getReasonPhrase(),
-				statusLine.getStatusCode() == 200 ? UriStatusDTO.Code.OK
-						: UriStatusDTO.Code.ERROR);
+				getStatusForHttpCode(statusLine.getStatusCode()));
 	}
 
 	private Collection<String> extractChildren(HttpResponse resp) {
+		Collection<String> result = null;
 
+		int httpCode = resp.getStatusLine().getStatusCode();
+		if (isRedirect(httpCode)) {
+			result = extractNextFromRedirect(resp);
+		} else {
+			result = extractChildrenFromHtml(resp);
+		}
+		return result;
+	}
+
+	private Collection<String> extractNextFromRedirect(HttpResponse resp) {
+		return ImmutableList.of(resp.getFirstHeader("Location").getValue());
+	}
+
+	private Collection<String> extractChildrenFromHtml(HttpResponse resp) {
 		URL url;
 		try {
 			url = new URL(uri);
@@ -138,6 +160,31 @@ public class UriChecker implements Runnable {
 		}
 
 		return builder.build();
+	}
+
+	private UriStatusDTO.Code getStatusForHttpCode(int httpCode) {
+
+		UriStatusDTO.Code result;
+
+		switch (httpCode) {
+		case 200:
+			result = UriStatusDTO.Code.OK;
+			break;
+		case 301:
+		case 302:
+			result = UriStatusDTO.Code.WARNING;
+			break;
+		default:
+			result = UriStatusDTO.Code.ERROR;
+			break;
+		}
+
+		return result;
+	}
+
+	private boolean isRedirect(int httpCode) {
+		boolean result = (httpCode == 301 || httpCode == 302);
+		return result;
 	}
 
 }
