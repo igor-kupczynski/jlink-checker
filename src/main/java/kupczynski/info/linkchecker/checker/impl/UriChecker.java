@@ -29,6 +29,9 @@ public class UriChecker implements Runnable {
 	private static final Logger logger = LoggerFactory
 			.getLogger(UriChecker.class);
 
+	public static final String DEFAULT_ENCODING = "UTF-8";
+	private static final String CHARSET_PREFIX = "charset=";
+
 	private final UriService uriService;
 	private final boolean follow;
 	private final String from;
@@ -125,7 +128,8 @@ public class UriChecker implements Runnable {
 
 		Document document;
 		try {
-			document = Jsoup.parse(resp.getEntity().getContent(), "UTF-8", uri);
+			document = Jsoup.parse(resp.getEntity().getContent(),
+					getEncoding(resp), uri);
 
 		} catch (IllegalStateException e) {
 			throw new AssertionError(e);
@@ -172,6 +176,23 @@ public class UriChecker implements Runnable {
 
 	private boolean isRedirect(int httpCode) {
 		boolean result = (httpCode == 301 || httpCode == 302);
+		return result;
+	}
+
+	private String getEncoding(HttpResponse resp) {
+		String result = DEFAULT_ENCODING;
+		String ct = resp.getFirstHeader("Content-Type").getValue();
+
+		String[] items = ct.split(";");
+		if (items.length == 2) {
+			String enc = items[1];
+			int idx = enc.indexOf(CHARSET_PREFIX);
+			if (idx >= 0) {
+				result = enc.substring(idx + CHARSET_PREFIX.length()).trim()
+						.toUpperCase();
+			}
+		}
+
 		return result;
 	}
 
