@@ -13,11 +13,16 @@ import org.supercsv.cellprocessor.ift.CellProcessor;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
+import org.supercsv.quote.AlwaysQuoteMode;
 
 public class CsvUriStatusReporter {
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(CsvUriStatusReporter.class);
+
+	private static final CsvPreference ALWAYS_QUOTE = new CsvPreference.Builder(
+			CsvPreference.STANDARD_PREFERENCE).useQuoteMode(
+			new AlwaysQuoteMode()).build();
 
 	private final String fname;
 
@@ -28,11 +33,10 @@ public class CsvUriStatusReporter {
 	public void reportUris(Collection<UriStatusDTO> uris) {
 		ICsvBeanWriter beanWriter = null;
 		try {
-			beanWriter = new CsvBeanWriter(new FileWriter(fname),
-					CsvPreference.STANDARD_PREFERENCE);
+			beanWriter = new CsvBeanWriter(new FileWriter(fname), ALWAYS_QUOTE);
 			beanWriter.writeHeader(headers);
 			for (UriStatusDTO item : uris) {
-				beanWriter.write(item, headers, processors);
+				beanWriter.write(item, columns, processors);
 			}
 
 		} catch (IOException e) {
@@ -59,7 +63,10 @@ public class CsvUriStatusReporter {
 			new NotNull(), // depth
 	};
 
-	private final String[] headers = new String[] { "status", "message",
+	private final String[] columns = new String[] { "status", "message",
 			"httpCode", "fromUri", "baseUri", "finalUri", "depth" };
+
+	private final String[] headers = new String[] { "Status", "Message",
+			"HTTP Code", "On page", "Link to", "finalUri", "Depth" };
 
 }
