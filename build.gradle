@@ -3,7 +3,7 @@ apply plugin: 'eclipse'
 apply plugin:'application'
 
 group = "kupczynski.info.linkchecker"
-version = "0.0.1"
+version = "0.0.2-SNAPSHOT"
 
 repositories { mavenCentral() }
 
