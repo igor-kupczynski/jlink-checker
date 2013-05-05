@@ -11,6 +11,9 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import kupczynski.info.linkchecker.checker.api.CutOffStrategy;
 import kupczynski.info.linkchecker.checker.api.UriService;
 import kupczynski.info.linkchecker.checker.api.UriStatusDTO;
@@ -18,6 +21,9 @@ import kupczynski.info.linkchecker.checker.api.UriStatusDTO;
 import com.google.common.collect.ImmutableMap;
 
 public class UriServiceImpl implements UriService {
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(UriServiceImpl.class);
 
 	private boolean started = false;
 	private final CountDownLatch isDone = new CountDownLatch(1);
@@ -39,6 +45,8 @@ public class UriServiceImpl implements UriService {
 		checkState(!started, "This UriSerive was already started.");
 		started = true;
 
+		logger.info("Starting {}", uri);
+
 		checkNext(true, "", uri, 0);
 
 		try {
@@ -55,7 +63,7 @@ public class UriServiceImpl implements UriService {
 	@Override
 	public void finished(UriStatusDTO status) {
 		statuses.put(status.getFinalUri(), status);
-		
+
 		long todo = requests.decrementAndGet();
 		if (todo == 0) {
 			isDone.countDown();

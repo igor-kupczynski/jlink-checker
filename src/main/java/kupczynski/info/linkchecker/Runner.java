@@ -1,6 +1,7 @@
 package kupczynski.info.linkchecker;
 
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.regex.Pattern;
@@ -20,7 +21,7 @@ public class Runner {
 
 	public static void main(String[] args) {
 
-		ExecutorService exec = Executors.newSingleThreadExecutor();
+		ExecutorService exec = Executors.newFixedThreadPool(8);
 
 		CutOffStrategy cutoff = new MultiCutOffStrategy(
 				new MaxDepthCutOffStrategy(9), new AllowedUriCutOffStrategy(
@@ -29,6 +30,8 @@ public class Runner {
 		UriService uri = new UriServiceImpl(exec, cutoff);
 		Map<String, UriStatusDTO> result = uri.start("http://masz-prawo.info/");
 
-		System.out.println(result);
+		for (Entry<String, UriStatusDTO> item : result.entrySet()) {
+			System.out.println(item);
+		}
 	}
 }
