@@ -21,7 +21,7 @@ public class CsvUriStatusReporter {
 			.getLogger(CsvUriStatusReporter.class);
 
 	private static final CsvPreference ALWAYS_QUOTE = new CsvPreference.Builder(
-			CsvPreference.STANDARD_PREFERENCE).useQuoteMode(
+			CsvPreference.EXCEL_NORTH_EUROPE_PREFERENCE).useQuoteMode(
 			new AlwaysQuoteMode()).build();
 
 	private final String fname;

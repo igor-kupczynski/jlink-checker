@@ -124,8 +124,6 @@ public class UriChecker implements Runnable {
 	}
 
 	private Collection<String> extractChildrenFromHtml(HttpResponse resp) {
-		// TODO: encoding
-
 		Document document;
 		try {
 			document = Jsoup.parse(resp.getEntity().getContent(),
