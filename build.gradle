@@ -24,3 +24,8 @@ dependencies {
 
 
 mainClassName = "kupczynski.info.linkchecker.Runner"
+
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '1.5'
+}
