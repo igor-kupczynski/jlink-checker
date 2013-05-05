@@ -13,7 +13,7 @@ import kupczynski.info.linkchecker.checker.impl.strategy.MultiCutOffStrategy;
 
 public class DefaulUriServiceFactory implements UriServiceFactory {
 
-	public static final int THREAD_COUNT = 32;
+	public static final int THREAD_COUNT = 16;
 	private final String baseUri;
 
 	public DefaulUriServiceFactory(String baseUri) {

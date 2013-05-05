@@ -13,7 +13,10 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.params.HttpParams;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -38,6 +41,14 @@ public class UriChecker implements Runnable {
 	private final String uri;
 	private final Integer depth;
 
+	private final static PoolingClientConnectionManager CONNECTION_MANAGER = new PoolingClientConnectionManager();
+	private final static HttpClient CLIENT = new DefaultHttpClient(
+			CONNECTION_MANAGER);
+	static {
+		CONNECTION_MANAGER.setMaxTotal(16);
+		CONNECTION_MANAGER.setDefaultMaxPerRoute(8);
+	}
+
 	public UriChecker(UriService uriService, boolean follow, String from,
 			String uri, Integer depth) {
 		this.uriService = uriService;
@@ -53,7 +64,7 @@ public class UriChecker implements Runnable {
 		UriStatusDTO result = null;
 		Collection<String> children = null;
 
-		HttpResponse resp;
+		HttpResponse resp = null;
 		try {
 			resp = fetchUri(uri);
 			result = fromResponse(resp);
@@ -77,11 +88,16 @@ public class UriChecker implements Runnable {
 		} else {
 			uriService.finished(result);
 		}
+		if (resp != null) {
+			try {
+				EntityUtils.consume(resp.getEntity());
+			} catch (IOException e) {
+				logger.error("Error releasing connection", e);
+			}
+		}
 	}
 
 	private HttpResponse fetchUri(String uri) {
-		// TODO: multithreading
-		HttpClient client = new DefaultHttpClient();
 		HttpGet httpget = new HttpGet(uri);
 
 		HttpParams params = httpget.getParams();
@@ -90,7 +106,7 @@ public class UriChecker implements Runnable {
 
 		HttpResponse response;
 		try {
-			response = client.execute(httpget);
+			response = CLIENT.execute(httpget, new BasicHttpContext());
 		} catch (ClientProtocolException e) {
 			throw new RuntimeException(e);
 		} catch (IOException e) {
