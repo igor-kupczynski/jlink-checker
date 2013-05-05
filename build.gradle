@@ -2,6 +2,9 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin:'application'
 
+group = "kupczynski.info.linkchecker"
+version = "0.0.1"
+
 repositories { mavenCentral() }
 
 def slf4jVer = '1.7.5'
