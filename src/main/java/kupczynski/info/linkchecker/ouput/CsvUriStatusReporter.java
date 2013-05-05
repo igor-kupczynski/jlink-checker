@@ -58,15 +58,14 @@ public class CsvUriStatusReporter {
 			new NotNull(), // message
 			new NotNull(), // httpCode
 			new NotNull(), // fromUri
-			new NotNull(), // baseUri
-			new NotNull(), // finalUri
+			new NotNull(), // uri
 			new NotNull(), // depth
 	};
 
 	private final String[] columns = new String[] { "status", "message",
-			"httpCode", "fromUri", "baseUri", "finalUri", "depth" };
+			"httpCode", "fromUri", "uri", "depth" };
 
 	private final String[] headers = new String[] { "Status", "Message",
-			"HTTP Code", "On page", "Link to", "finalUri", "Depth" };
+			"HTTP Code", "On page", "Link to", "Depth" };
 
 }

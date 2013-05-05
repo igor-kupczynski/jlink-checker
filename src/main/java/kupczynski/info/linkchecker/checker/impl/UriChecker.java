@@ -66,7 +66,7 @@ public class UriChecker implements Runnable {
 			}
 		} catch (RuntimeException e) {
 			logger.warn("Error fetching {}", uri);
-			result = new UriStatusDTO(from, depth, uri, uri, -1,
+			result = new UriStatusDTO(from, depth, uri, -1,
 					"RuntimeException: " + e.getMessage(),
 					UriStatusDTO.Code.ERROR);
 		}
@@ -101,8 +101,8 @@ public class UriChecker implements Runnable {
 
 	private UriStatusDTO fromResponse(HttpResponse resp) {
 		StatusLine statusLine = resp.getStatusLine();
-		return new UriStatusDTO(from, depth, uri, uri,
-				statusLine.getStatusCode(), statusLine.getReasonPhrase(),
+		return new UriStatusDTO(from, depth, uri, statusLine.getStatusCode(),
+				statusLine.getReasonPhrase(),
 				getStatusForHttpCode(statusLine.getStatusCode()));
 	}
 
@@ -123,6 +123,9 @@ public class UriChecker implements Runnable {
 	}
 
 	private Collection<String> extractChildrenFromHtml(HttpResponse resp) {
+
+		// TODO: base uri determination
+
 		URL url;
 		try {
 			url = new URL(uri);

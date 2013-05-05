@@ -62,7 +62,7 @@ public class UriServiceImpl implements UriService {
 
 	@Override
 	public void finished(UriStatusDTO status) {
-		statuses.put(status.getFinalUri(), status);
+		statuses.put(status.getUri(), status);
 
 		long todo = requests.decrementAndGet();
 		if (todo == 0) {
@@ -79,7 +79,7 @@ public class UriServiceImpl implements UriService {
 				if (!seenUris.contains(child)) {
 					seenUris.add(child);
 					checkNext(cutOffStrategy.shouldFollow(depth, child),
-							status.getFinalUri(), child, depth);
+							status.getUri(), child, depth);
 				}
 			}
 		}

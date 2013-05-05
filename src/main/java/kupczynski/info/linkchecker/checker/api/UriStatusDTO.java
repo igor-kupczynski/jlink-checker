@@ -8,18 +8,16 @@ public class UriStatusDTO {
 
 	private final String fromUri;
 	private final Integer depth;
-	private final String baseUri;
-	private final String finalUri;
+	private final String uri;
 	private final Code status;
 	private final Integer httpCode;
 	private final String message;
 
-	public UriStatusDTO(String fromUri, Integer depth, String baseUri,
-			String optional, Integer httpCode, String message, Code status) {
+	public UriStatusDTO(String fromUri, Integer depth, String uri,
+			Integer httpCode, String message, Code status) {
 		this.fromUri = fromUri;
 		this.depth = depth;
-		this.baseUri = baseUri;
-		this.finalUri = optional;
+		this.uri = uri;
 		this.httpCode = httpCode;
 		this.message = message;
 		this.status = status;
@@ -33,12 +31,8 @@ public class UriStatusDTO {
 		return depth;
 	}
 
-	public String getBaseUri() {
-		return baseUri;
-	}
-
-	public String getFinalUri() {
-		return finalUri;
+	public String getUri() {
+		return uri;
 	}
 
 	public Code getStatus() {
@@ -56,9 +50,8 @@ public class UriStatusDTO {
 	@Override
 	public String toString() {
 		return "UriStatusDTO [fromUri=" + fromUri + ", depth=" + depth
-				+ ", baseUri=" + baseUri + ", finalUri=" + finalUri
-				+ ", status=" + status + ", httpCode=" + httpCode
-				+ ", message=" + message + "]";
+				+ ", uri=" + uri + ", status=" + status + ", httpCode="
+				+ httpCode + ", message=" + message + "]";
 	}
 
 }
