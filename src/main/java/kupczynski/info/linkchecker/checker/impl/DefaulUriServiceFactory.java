@@ -14,10 +14,10 @@ import kupczynski.info.linkchecker.checker.impl.strategy.MultiCutOffStrategy;
 public class DefaulUriServiceFactory implements UriServiceFactory {
 
 	public static final int THREAD_COUNT = 16;
-	private final String baseUri;
+	private final String allowed;
 
-	public DefaulUriServiceFactory(String baseUri) {
-		this.baseUri = baseUri;
+	public DefaulUriServiceFactory(String allowed) {
+		this.allowed = allowed;
 
 	}
 
@@ -35,20 +35,6 @@ public class DefaulUriServiceFactory implements UriServiceFactory {
 	}
 
 	protected CutOffStrategy makeCutOffStrategy() {
-
-		StringBuilder allowed = new StringBuilder();
-		for (int idx = 0; idx < baseUri.length(); idx++) {
-			char c = baseUri.charAt(idx);
-			if (c == '.') {
-				allowed.append("\\.");
-			} else {
-				allowed.append(c);
-			}
-		}
-		if (allowed.lastIndexOf("/") != allowed.length() - 1) {
-			allowed.append("/");
-		}
-		allowed.append(".*");
 
 		return new MultiCutOffStrategy(new MaxDepthCutOffStrategy(9),
 				new AllowedUriCutOffStrategy(

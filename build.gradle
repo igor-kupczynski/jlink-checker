@@ -18,14 +18,18 @@ dependencies {
 			[group: 'org.slf4j', name: 'slf4j-api', version: slf4jVer],
 			[group: 'ch.qos.logback', name: 'logback-classic', version: logbackVer],
 			[group: 'ch.qos.logback', name: 'logback-core', version: logbackVer],
-			[group: 'net.sf.supercsv', name: 'super-csv', version: '2.1.0']
+			[group: 'net.sf.supercsv', name: 'super-csv', version: '2.1.0'],
+			[group: 'commons-cli', name: 'commons-cli', version: '1.2']
 			)
 }
 
 
 mainClassName = "kupczynski.info.linkchecker.Runner"
 
-
-task wrapper(type: Wrapper) {
-	gradleVersion = '1.5'
+run {
+	if ( project.hasProperty('args') ) {
+		args project.args.split('\\s+')
+	}
 }
+
+task wrapper(type: Wrapper) { gradleVersion = '1.5' }

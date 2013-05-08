@@ -8,18 +8,42 @@ import kupczynski.info.linkchecker.checker.api.UriStatusDTO;
 import kupczynski.info.linkchecker.checker.impl.DefaulUriServiceFactory;
 import kupczynski.info.linkchecker.ouput.CsvUriStatusReporter;
 
+import org.apache.commons.cli.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Runner {
 
-	public static final String base_uri = "http://masz-prawo.info/";
+	private static final Logger logger = LoggerFactory.getLogger(Runner.class);
 
-	public static void main(String[] args) {
+	private final CliOptions options;
 
-		UriServiceFactory factory = new DefaulUriServiceFactory(base_uri);
+	private Runner(CliOptions options) {
+		this.options = options;
+	}
+
+	private void run() {
+		UriServiceFactory factory = new DefaulUriServiceFactory(
+				options.getAllowedUri());
 
 		UriService uri = factory.createUriService();
-		Map<String, UriStatusDTO> result = uri.start("http://masz-prawo.info/");
+		Map<String, UriStatusDTO> result = uri.start(options.getTarget());
 
-		CsvUriStatusReporter reporter = new CsvUriStatusReporter("report.csv");
+		CsvUriStatusReporter reporter = new CsvUriStatusReporter(
+				options.getReportFileName());
 		reporter.reportUris(result.values());
 	}
+
+	public static void main(String... args) {
+		CliOptions options = null;
+		try {
+			options = CliOptions.fromArgs(args);
+		} catch (ParseException e) {
+			logger.warn("Error parsing command line options", e);
+			System.exit(1);
+		}
+		Runner runner = new Runner(options);
+		runner.run();
+	}
+
 }
