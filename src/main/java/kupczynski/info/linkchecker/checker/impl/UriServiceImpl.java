@@ -14,9 +14,9 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kupczynski.info.linkchecker.checker.api.CutOffStrategy;
-import kupczynski.info.linkchecker.checker.api.UriService;
-import kupczynski.info.linkchecker.checker.api.UriStatusDTO;
+import kupczynski.info.linkchecker.checker.CutOffStrategy;
+import kupczynski.info.linkchecker.checker.UriService;
+import kupczynski.info.linkchecker.checker.UriStatusDTO;
 
 import com.google.common.collect.ImmutableMap;
 

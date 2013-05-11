@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import com.google.common.collect.ImmutableList;
 
-import kupczynski.info.linkchecker.checker.api.CutOffStrategy;
+import kupczynski.info.linkchecker.checker.CutOffStrategy;
 
 public class MultiCutOffStrategy implements CutOffStrategy {
 

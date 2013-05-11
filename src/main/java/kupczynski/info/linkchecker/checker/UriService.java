@@ -1,4 +1,4 @@
-package kupczynski.info.linkchecker.checker.api;
+package kupczynski.info.linkchecker.checker;
 
 import java.util.Collection;
 import java.util.Map;

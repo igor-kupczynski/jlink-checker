@@ -3,7 +3,7 @@ package kupczynski.info.linkchecker.checker.impl.strategy;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import kupczynski.info.linkchecker.checker.api.CutOffStrategy;
+import kupczynski.info.linkchecker.checker.CutOffStrategy;
 
 public class AllowedUriCutOffStrategy implements CutOffStrategy {
 

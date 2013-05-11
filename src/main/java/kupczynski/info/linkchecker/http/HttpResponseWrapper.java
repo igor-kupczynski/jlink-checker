@@ -1,4 +1,4 @@
-package kupczynski.info.linkchecker.checker.http;
+package kupczynski.info.linkchecker.http;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

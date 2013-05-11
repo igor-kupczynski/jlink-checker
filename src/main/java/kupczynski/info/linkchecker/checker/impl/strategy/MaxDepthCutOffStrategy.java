@@ -1,6 +1,6 @@
 package kupczynski.info.linkchecker.checker.impl.strategy;
 
-import kupczynski.info.linkchecker.checker.api.CutOffStrategy;
+import kupczynski.info.linkchecker.checker.CutOffStrategy;
 
 public class MaxDepthCutOffStrategy implements CutOffStrategy {
 

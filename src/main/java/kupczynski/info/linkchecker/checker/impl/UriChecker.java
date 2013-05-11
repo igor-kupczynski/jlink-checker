@@ -3,11 +3,11 @@ package kupczynski.info.linkchecker.checker.impl;
 import java.io.IOException;
 import java.util.Collection;
 
-import kupczynski.info.linkchecker.checker.api.UriService;
-import kupczynski.info.linkchecker.checker.api.UriStatusDTO;
-import kupczynski.info.linkchecker.checker.http.HttpResponseWrapper;
-import kupczynski.info.linkchecker.checker.http.UriFetcher;
-import kupczynski.info.linkchecker.checker.http.impl.UriFetcherImpl;
+import kupczynski.info.linkchecker.checker.UriService;
+import kupczynski.info.linkchecker.checker.UriStatusDTO;
+import kupczynski.info.linkchecker.http.HttpResponseWrapper;
+import kupczynski.info.linkchecker.http.UriFetcher;
+import kupczynski.info.linkchecker.http.impl.UriFetcherImpl;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;

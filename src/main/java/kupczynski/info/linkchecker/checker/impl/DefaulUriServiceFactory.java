@@ -4,9 +4,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.regex.Pattern;
 
-import kupczynski.info.linkchecker.checker.api.CutOffStrategy;
-import kupczynski.info.linkchecker.checker.api.UriService;
-import kupczynski.info.linkchecker.checker.api.UriServiceFactory;
+import kupczynski.info.linkchecker.checker.CutOffStrategy;
+import kupczynski.info.linkchecker.checker.UriService;
+import kupczynski.info.linkchecker.checker.UriServiceFactory;
 import kupczynski.info.linkchecker.checker.impl.strategy.AllowedUriCutOffStrategy;
 import kupczynski.info.linkchecker.checker.impl.strategy.MaxDepthCutOffStrategy;
 import kupczynski.info.linkchecker.checker.impl.strategy.MultiCutOffStrategy;

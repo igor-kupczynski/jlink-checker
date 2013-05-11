@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
 
-import kupczynski.info.linkchecker.checker.api.UriStatusDTO;
+import kupczynski.info.linkchecker.checker.UriStatusDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

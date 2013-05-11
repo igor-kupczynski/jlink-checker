@@ -2,9 +2,9 @@ package kupczynski.info.linkchecker;
 
 import java.util.Map;
 
-import kupczynski.info.linkchecker.checker.api.UriService;
-import kupczynski.info.linkchecker.checker.api.UriServiceFactory;
-import kupczynski.info.linkchecker.checker.api.UriStatusDTO;
+import kupczynski.info.linkchecker.checker.UriService;
+import kupczynski.info.linkchecker.checker.UriServiceFactory;
+import kupczynski.info.linkchecker.checker.UriStatusDTO;
 import kupczynski.info.linkchecker.checker.impl.DefaulUriServiceFactory;
 import kupczynski.info.linkchecker.ouput.CsvUriStatusReporter;
 
