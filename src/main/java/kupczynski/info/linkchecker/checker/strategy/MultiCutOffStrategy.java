@@ -1,4 +1,4 @@
-package kupczynski.info.linkchecker.checker.impl.strategy;
+package kupczynski.info.linkchecker.checker.strategy;
 
 import java.util.Collection;
 

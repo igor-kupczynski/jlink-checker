@@ -1,4 +1,4 @@
-package kupczynski.info.linkchecker.checker.impl.strategy;
+package kupczynski.info.linkchecker.checker.strategy;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
