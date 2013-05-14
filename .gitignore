@@ -6,6 +6,12 @@
 .settings
 .classpath
 
+# Idea
+.idea
+*.iml
+*.ipr
+*.iws
+
 # Binaries
 bin
 build

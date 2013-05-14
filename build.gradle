@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin:'application'
+apply plugin: 'idea'
+apply plugin: 'application'
 
 group = "info.kupczynski.linkchecker"
 version = "0.0.2-SNAPSHOT"
