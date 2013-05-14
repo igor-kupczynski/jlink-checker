@@ -50,7 +50,7 @@ public class HttpResponseWrapper implements Closeable {
 	}
 
 	public Collection<String> nextLinks() {
-		Collection<String> result = null;
+		Collection<String> result;
 
 		if (isRedirect()) {
 			result = nextFromRedirect();
@@ -83,13 +83,11 @@ public class HttpResponseWrapper implements Closeable {
 			document = Jsoup.parse(context.getEntity().getContent(),
 					getEncoding(), uri);
 
-		} catch (IllegalStateException e) {
-			throw new AssertionError(e);
-		} catch (IOException e) {
+		} catch (IllegalStateException | IOException e) {
 			throw new AssertionError(e);
 		}
 
-		Builder<String> builder = ImmutableList.<String> builder();
+        Builder<String> builder = ImmutableList.builder();
 
 		if (document != null) {
 			Elements links = document.select("a[href]");

@@ -13,7 +13,7 @@ import info.kupczynski.linkchecker.checker.strategy.MultiCutOffStrategy;
 
 public class DefaulUriServiceFactory implements UriServiceFactory {
 
-	public static final int THREAD_COUNT = 16;
+	private static final int THREAD_COUNT = 16;
 	private final String allowed;
 
 	public DefaulUriServiceFactory(String allowed) {
@@ -38,7 +38,7 @@ public class DefaulUriServiceFactory implements UriServiceFactory {
 
 		return new MultiCutOffStrategy(new MaxDepthCutOffStrategy(9),
 				new AllowedUriCutOffStrategy(
-						Pattern.compile(allowed.toString())));
+						Pattern.compile(allowed)));
 	}
 
 }

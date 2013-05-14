@@ -21,7 +21,7 @@ public class UriCheckerTest {
     private static final String from = "http://example.com/";
     private static final String to = "http://example.com/other";
     private static final int depth = 3;
-    UriService uriService;
+    private UriService uriService;
 
     @Before
     public void setUp() {
