@@ -103,4 +103,13 @@ public class UriChecker implements Runnable {
 		return result;
 	}
 
+	/**
+	 * For tests only
+	 * 
+	 * @param uriFetcher
+	 */
+	static void setUriFetcher(UriFetcher uriFetcher) {
+		UriChecker.uriFetcher = uriFetcher;
+	}
+
 }
