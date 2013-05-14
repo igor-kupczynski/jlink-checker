@@ -1,10 +1,10 @@
-package kupczynski.info.linkchecker.checker.strategy;
+package info.kupczynski.linkchecker.checker.strategy;
 
 import java.util.Collection;
 
 import com.google.common.collect.ImmutableList;
 
-import kupczynski.info.linkchecker.checker.CutOffStrategy;
+import info.kupczynski.linkchecker.checker.CutOffStrategy;
 
 public class MultiCutOffStrategy implements CutOffStrategy {
 

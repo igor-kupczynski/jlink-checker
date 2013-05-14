@@ -1,4 +1,4 @@
-package kupczynski.info.linkchecker.http;
+package info.kupczynski.linkchecker.http;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package kupczynski.info.linkchecker;
+package info.kupczynski.linkchecker;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;

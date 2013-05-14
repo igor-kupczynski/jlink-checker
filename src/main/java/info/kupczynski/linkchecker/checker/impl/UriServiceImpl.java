@@ -1,4 +1,4 @@
-package kupczynski.info.linkchecker.checker.impl;
+package info.kupczynski.linkchecker.checker.impl;
 
 import static com.google.common.base.Preconditions.checkState;
 
@@ -14,9 +14,9 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kupczynski.info.linkchecker.checker.CutOffStrategy;
-import kupczynski.info.linkchecker.checker.UriService;
-import kupczynski.info.linkchecker.checker.UriStatusDTO;
+import info.kupczynski.linkchecker.checker.CutOffStrategy;
+import info.kupczynski.linkchecker.checker.UriService;
+import info.kupczynski.linkchecker.checker.UriStatusDTO;
 
 import com.google.common.collect.ImmutableMap;
 

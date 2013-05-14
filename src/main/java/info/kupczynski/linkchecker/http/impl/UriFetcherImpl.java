@@ -1,9 +1,9 @@
-package kupczynski.info.linkchecker.http.impl;
+package info.kupczynski.linkchecker.http.impl;
 
 import java.io.IOException;
 
-import kupczynski.info.linkchecker.http.HttpResponseWrapper;
-import kupczynski.info.linkchecker.http.UriFetcher;
+import info.kupczynski.linkchecker.http.HttpResponseWrapper;
+import info.kupczynski.linkchecker.http.UriFetcher;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;

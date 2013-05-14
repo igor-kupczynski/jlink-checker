@@ -1,10 +1,10 @@
-package kupczynski.info.linkchecker.ouput;
+package info.kupczynski.linkchecker.ouput;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
 
-import kupczynski.info.linkchecker.checker.UriStatusDTO;
+import info.kupczynski.linkchecker.checker.UriStatusDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

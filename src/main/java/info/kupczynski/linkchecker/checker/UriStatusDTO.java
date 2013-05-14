@@ -1,4 +1,4 @@
-package kupczynski.info.linkchecker.checker;
+package info.kupczynski.linkchecker.checker;
 
 public class UriStatusDTO {
 

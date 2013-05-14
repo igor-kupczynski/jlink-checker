@@ -1,12 +1,12 @@
-package kupczynski.info.linkchecker;
+package info.kupczynski.linkchecker;
 
 import java.util.Map;
 
-import kupczynski.info.linkchecker.checker.UriService;
-import kupczynski.info.linkchecker.checker.UriServiceFactory;
-import kupczynski.info.linkchecker.checker.UriStatusDTO;
-import kupczynski.info.linkchecker.checker.impl.DefaulUriServiceFactory;
-import kupczynski.info.linkchecker.ouput.CsvUriStatusReporter;
+import info.kupczynski.linkchecker.checker.UriService;
+import info.kupczynski.linkchecker.checker.UriServiceFactory;
+import info.kupczynski.linkchecker.checker.UriStatusDTO;
+import info.kupczynski.linkchecker.checker.impl.DefaulUriServiceFactory;
+import info.kupczynski.linkchecker.ouput.CsvUriStatusReporter;
 
 import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;

@@ -1,15 +1,15 @@
-package kupczynski.info.linkchecker.checker.impl;
+package info.kupczynski.linkchecker.checker.impl;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.regex.Pattern;
 
-import kupczynski.info.linkchecker.checker.CutOffStrategy;
-import kupczynski.info.linkchecker.checker.UriService;
-import kupczynski.info.linkchecker.checker.UriServiceFactory;
-import kupczynski.info.linkchecker.checker.strategy.AllowedUriCutOffStrategy;
-import kupczynski.info.linkchecker.checker.strategy.MaxDepthCutOffStrategy;
-import kupczynski.info.linkchecker.checker.strategy.MultiCutOffStrategy;
+import info.kupczynski.linkchecker.checker.CutOffStrategy;
+import info.kupczynski.linkchecker.checker.UriService;
+import info.kupczynski.linkchecker.checker.UriServiceFactory;
+import info.kupczynski.linkchecker.checker.strategy.AllowedUriCutOffStrategy;
+import info.kupczynski.linkchecker.checker.strategy.MaxDepthCutOffStrategy;
+import info.kupczynski.linkchecker.checker.strategy.MultiCutOffStrategy;
 
 public class DefaulUriServiceFactory implements UriServiceFactory {
 

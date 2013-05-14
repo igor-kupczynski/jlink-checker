@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin:'application'
 
-group = "kupczynski.info.linkchecker"
+group = "info.kupczynski.linkchecker"
 version = "0.0.2-SNAPSHOT"
 
 repositories { mavenCentral() }
@@ -24,7 +24,7 @@ dependencies {
 }
 
 
-mainClassName = "kupczynski.info.linkchecker.Runner"
+mainClassName = "info.kupczynski.linkchecker.Runner"
 
 run {
 	if ( project.hasProperty('args') ) {
