@@ -112,6 +112,30 @@ public class UriCheckerTest {
 		assertThat(children).hasSize(2).contains(item1).contains(item2);
 	}
 
+	@Test
+	public void assertNotFollowWhenNotAskedTo() {
+		// With
+		UriChecker uriChecker = new UriChecker(uriService, false, from, to,
+				depth);
+		String item1 = "http://example.com/foo";
+		String item2 = "http://example.com/bar";
+		UriChecker
+				.setUriFetcher(mockUriFetcher(mockWithChildren(item1, item2)));
+
+		ArgumentCaptor<UriStatusDTO> uriStatusDTOCaptor = ArgumentCaptor
+				.forClass(UriStatusDTO.class);
+
+		// Do
+		uriChecker.run();
+
+		// Assert
+		verify(uriService).finished(uriStatusDTOCaptor.capture());
+
+		UriStatusDTO status = uriStatusDTOCaptor.getValue();
+		assertThat(status.getHttpCode()).isEqualTo(Integer.valueOf(200));
+		assertThat(status.getStatus()).isEqualTo(UriStatusDTO.Code.OK);
+	}
+
 	private UriService mockUriService() {
 		UriService us = mock(UriService.class);
 		return us;
